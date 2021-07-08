@@ -1,0 +1,37 @@
+<center>
+<h2>USER</h2>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Password</th>
+      <th scope="col">Email</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+      <th scope="col">Show</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @welcomes.each do |welcome| %>
+      <tr>
+        <td><%= welcome.name %></td>
+        <td><%= welcome.password %></td>
+        <td><%= welcome.email %></td>
+        <td><%= link_to "Edit", edit_welcome_path(welcome.id), method: :get, class: "btn btn-secondary active" %> </td>
+        <td><%= link_to "Delete", welcome_path(welcome.id), method: :delete, class: "btn btn-danger" %></td>
+        <td><%= link_to "Show", welcome_path(welcome.id), method: :get, class: "btn btn-success" %></td>  
+      </tr>  
+    <% end %>
+  </tbody>
+  <%= link_to "New USER", new_welcome_path, class: "btn btn-secondary btn-lg" %> 
+</table>
+<br>
+<% if user_signed_in? %>
+Logged in as <strong><%= current_user.email %></strong>.
+<%= link_to 'Edit profile', edit_user_registration_path %> |
+<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<% else %>
+<%= link_to "Sign up", new_user_registration_path %> |
+<%= link_to "Login", new_user_session_path %>
+<% end %>
+</center>
