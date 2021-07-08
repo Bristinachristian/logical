@@ -1,4 +1,5 @@
 class WelcomesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @welcomes = Welcome.all
   end
@@ -23,7 +24,7 @@ class WelcomesController < ApplicationController
   end
 
   def destroy
-    @welcome =find(params[:id])
+    @welcome = Welcome.find(params[:id])
     @welcome.destroy
     redirect_to welcomes_path
   end
